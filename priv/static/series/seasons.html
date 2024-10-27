@@ -11,6 +11,7 @@
   </head>
   <body class="bg-gray-900 text-white">
     <div class="container mx-auto p-6">
+      <div id="serie-details" class="mb-6"></div>
       <h1 class="text-3xl font-bold mb-6">Seasons</h1>
       <div
         id="seasons-container"
@@ -23,6 +24,29 @@
       function getQueryParam(param) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(param);
+      }
+
+      // Fetch series details from API
+      async function fetchSerie(id) {
+        const response = await fetch(`http://localhost:4000/api/series/${id}`);
+        const { data: serie } = await response.json();
+
+        const serieDetails = document.getElementById('serie-details');
+        serieDetails.innerHTML = `
+            <div class="flex flex-1 w-full flex-col items-center">
+            <div class="flex space-x-4 mb-4">
+              ${serie.images
+                .map(
+                  (image) =>
+                    `<img src="${image}" alt="Serie Image" class="w-64 h-64 object-cover rounded-lg border-4 border-gray-800">`
+                )
+                .join('')}
+            </div>
+            <h1 class="text-4xl font-bold">${serie.title}</h1>
+            <p class="text-lg mt-2">${serie.description}</p>
+            <p class="text-md mt-2"><strong>Genre:</strong> ${serie.genre}</p>
+            </div>
+        `;
       }
 
       // Fetch seasons from API
@@ -52,7 +76,9 @@
         });
       }
 
-      // Call the fetch function
+      // Call the fetch functions
+      const serieId = getQueryParam('id');
+      fetchSerie(serieId);
       fetchSeasons();
     </script>
   </body>
