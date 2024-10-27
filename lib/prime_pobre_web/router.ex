@@ -13,8 +13,8 @@ defmodule PrimePobreWeb.Router do
     get "/series", SerieController, :index
     get "/series/:id", SerieController, :show
     get "/series/:id/seasons", SerieSeasonController, :index
-    get "/seasons/:id", SerieSeasonController, :show
-    get "/seasons/:id/episodes", SerieSeasonEpisodeController, :index
+    get "/series/:serie_id/seasons/:id", SerieSeasonController, :show
+    get "/series/:serie_id/seasons/:id/episodes", SerieSeasonEpisodeController, :index
 
     get "/series/:serie_id/seasons/:season_id/episodes/:id/stream",
         SerieSeasonEpisodeController,

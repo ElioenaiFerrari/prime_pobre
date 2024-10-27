@@ -20,8 +20,7 @@ defmodule PrimePobreWeb.SerieJSON do
       id: serie.id,
       title: serie.title,
       description: serie.description,
-      images: serie.images,
-      video_url: serie.video_url
+      images: serie.images
     }
   end
 end
