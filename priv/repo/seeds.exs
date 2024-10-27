@@ -44,7 +44,7 @@ SerieSeasonEpisodes.create_serie_season_episode(season, %{
     "A young hobbit, Frodo, who has found the One Ring that belongs to the Dark Lord Sauron, begins his journey with eight companions to Mount Doom, the only place where it can be destroyed.",
   video_url: "file://peaky_blinders_s01e01.ts",
   images: ["https://gizmodo.uol.com.br/wp-content/blogs.dir/8/files/2023/07/peaky-blinders.jpg"],
-  mime_type: "video/mp4",
+  mime_type: "video/mp2t",
   duration: 178,
   number: 1
 })
