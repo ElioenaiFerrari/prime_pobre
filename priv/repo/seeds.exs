@@ -16,8 +16,9 @@ Movies.create_movie(%{
   description:
     "A radio station in the middle of nowhere becomes the center of a zombie invasion.",
   video_url: "file://radio_pesadelo.mkv",
-  images:
-    "https://www.justwatch.com/images/backdrop/319854719/s640/radio-pesadelo/radio-pesadelo",
+  images: [
+    "https://www.justwatch.com/images/backdrop/319854719/s640/radio-pesadelo/radio-pesadelo"
+  ],
   mime_type: "video/mp4",
   genre: "Horror",
   duration: 90
@@ -25,24 +26,24 @@ Movies.create_movie(%{
 
 {:ok, serie} =
   Series.create_serie(%{
-    title: "O Senhor dos Anéis",
+    title: "Peaky Blinders",
     description:
-      "A young hobbit, Frodo, who has found the One Ring that belongs to the Dark Lord Sauron, begins his journey with eight companions to Mount Doom, the only place where it can be destroyed.",
-    images: ["https://image.tmdb.org/t/p/w342/9mZhIun3HhIUi2jneZzm5D20ZTj.jpg"],
-    genre: "Fantasia"
+      "A gangster family epic set in 1919 Birmingham, England and centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby, who means to move up in the world.",
+    images: ["https://gizmodo.uol.com.br/wp-content/blogs.dir/8/files/2023/07/peaky-blinders.jpg"],
+    genre: "Drama"
   })
 
 {:ok, season} =
-  SerieSeasons.create_season(serie, %{
-    number: 2
+  SerieSeasons.create_serie_season(serie, %{
+    number: 1
   })
 
-SerieSeasonEpisodes.create_episode(season, %{
+SerieSeasonEpisodes.create_serie_season_episode(season, %{
   title: "The Fellowship of the Ring",
   description:
     "A young hobbit, Frodo, who has found the One Ring that belongs to the Dark Lord Sauron, begins his journey with eight companions to Mount Doom, the only place where it can be destroyed.",
-  video_url: "file://lord_of_the_ring",
-  images: ["https://image.tmdb.org/t/p/w342/9mZhIun3HhIUi2jneZzm5D20ZTj.jpg"],
+  video_url: "file://peaky_blinders_s01e01.ts",
+  images: ["https://gizmodo.uol.com.br/wp-content/blogs.dir/8/files/2023/07/peaky-blinders.jpg"],
   mime_type: "video/mp4",
   duration: 178,
   number: 1

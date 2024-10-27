@@ -11,6 +11,7 @@ defmodule PrimePobre.Repo.Migrations.CreateSerieSeasonEpisodes do
       add :images, {:array, :string}
       add :mime_type, :string
       add :duration, :integer
+      add :number, :integer
 
       timestamps(type: :utc_datetime)
     end
