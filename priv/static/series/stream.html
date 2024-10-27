@@ -12,7 +12,7 @@
   <body class="bg-gray-900 text-white">
     <div class="flex items-center justify-center min-h-screen">
       <video
-        id="movie-video"
+        id="series-video"
         controls
         autoplay
         class="w-full max-w-4xl rounded-lg shadow-lg max-h-96"
@@ -22,25 +22,30 @@
     </div>
 
     <script>
-      // Function to get query parameter by name
+      // Função para obter parâmetros da query string pelo nome
       function getQueryParam(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
       }
 
-      // Get the episode ID, series ID, and season ID from the query parameters
+      // Obter os IDs da série, temporada e episódio dos parâmetros da URL
       const serieId = getQueryParam('id');
       const seasonId = getQueryParam('season_id');
       const episodeId = getQueryParam('episode_id');
 
-      // Set the video source URL if episodeId is available
+      // Definir a URL do vídeo se os parâmetros estiverem disponíveis
       if (episodeId && serieId && seasonId) {
-        const videoElement = document.getElementById('movie-video');
-        const sourceElement = document.createElement('source');
-        sourceElement.src = `http://localhost:4000/api/series/${serieId}/seasons/${seasonId}/episodes/${episodeId}/stream`;
-        sourceElement.type = 'video/mp4'; // Adjust based on your stream format
-        videoElement.appendChild(sourceElement);
-        videoElement.load(); // Load the video with the new source
+        const videoElement = document.getElementById('series-video');
+
+        // Define o URL de streaming para o episódio da série
+        videoElement.src = `http://localhost:4000/api/series/${serieId}/seasons/${seasonId}/episodes/${episodeId}/stream`;
+
+        // Carrega o vídeo com o novo URL
+        videoElement.load();
+      } else {
+        console.error(
+          'Os parâmetros de série, temporada ou episódio não foram fornecidos.'
+        );
       }
     </script>
   </body>

@@ -54,7 +54,7 @@ defmodule PrimePobreWeb.MovieController do
          conn,
          %Movie{
            video_url: "file://" <> filename
-         }
+         } = movie
        ) do
     path = Path.join(@video_dir, filename)
 
@@ -71,7 +71,7 @@ defmodule PrimePobreWeb.MovieController do
 
             # Configura os cabeçalhos de resposta para streaming parcial
             conn
-            |> put_resp_header("content-type", "video/mp4")
+            |> put_resp_header("content-type", movie.mime_type)
             |> put_resp_header("content-length", Integer.to_string(length))
             |> put_resp_header("content-range", "bytes #{start}-#{end_pos}/#{file_size}")
             |> send_chunked(:partial_content)
@@ -80,7 +80,7 @@ defmodule PrimePobreWeb.MovieController do
           _ ->
             # Responde com o vídeo completo se não houver "Range"
             conn
-            |> put_resp_header("content-type", "video/mp4")
+            |> put_resp_header("content-type", movie.mime_type)
             |> put_resp_header("content-length", Integer.to_string(file_size))
             |> send_chunked(:ok)
             |> stream_range(path, 0, file_size)
