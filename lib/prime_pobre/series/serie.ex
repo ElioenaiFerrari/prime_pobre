@@ -9,7 +9,6 @@ defmodule PrimePobre.Series.Serie do
     field :description, :string
     field :title, :string
     field :images, {:array, :string}
-    field :video_url, :string
     has_many :seasons, SerieSeason, on_delete: :delete_all
 
     timestamps(type: :utc_datetime)
@@ -18,7 +17,7 @@ defmodule PrimePobre.Series.Serie do
   @doc false
   def changeset(serie, attrs) do
     serie
-    |> cast(attrs, [:title, :description, :images, :video_url])
-    |> validate_required([:title, :description, :images, :video_url])
+    |> cast(attrs, [:title, :description, :images])
+    |> validate_required([:title, :description, :images])
   end
 end

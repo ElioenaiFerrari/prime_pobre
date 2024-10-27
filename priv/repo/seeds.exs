@@ -9,7 +9,7 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias PrimePobre.Movies
+alias PrimePobre.{Movies, Series, SerieSeasons, SerieSeasonEpisodes}
 
 Movies.create_movie(%{
   title: "The Matrix",
@@ -20,3 +20,13 @@ Movies.create_movie(%{
     "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
   ]
 })
+
+{:ok, serie} =
+  Series.create_serie(%{
+    title: "Breaking Bad",
+    description:
+      "A high school chemistry teacher turned methamphetamine manufacturer partners with a former student to secure his family's future.",
+    images: [
+      "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    ]
+  })

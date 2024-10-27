@@ -7,7 +7,7 @@ defmodule PrimePobre.SerieSeasons.SerieSeason do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "serie_seasons" do
-    field :number, :string
+    field :number, :integer
     belongs_to :serie, Serie
     has_many :episodes, SerieSeasonEpisode, on_delete: :delete_all
 
