@@ -15,7 +15,7 @@ defmodule PrimePobreWeb.MovieController do
     with %Movie{} = movie <- Movies.get_movie!(id) do
       conn =
         conn
-        |> put_resp_content_type("video/mp4")
+        |> put_resp_content_type(movie.mime_type)
         |> send_chunked(:ok)
 
       HTTPoison.get!(movie.video_url, [], stream_to: self())

@@ -15,7 +15,8 @@ Movies.create_movie(%{
   title: "The Matrix",
   description:
     "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
-  video_url: "https://videos.pexels.com/video-files/8953675/8953675-uhd_1440_2560_30fps.mp4",
+  video_url: "https://drive.google.com/file/d/1_zcadQmwv6b1xpFyGEQGSbsOhKXKTmzAcg/view",
+  mime_type: "video/x-msvideo",
   images: [
     "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
   ]
@@ -41,6 +42,7 @@ SerieSeasonEpisodes.create_serie_season_episode(season, %{
   description:
     "Diagnosed with terminal lung cancer, a high school chemistry teacher resorts to cooking and selling methamphetamine to provide for his family.",
   video_url: "https://videos.pexels.com/video-files/8953675/8953675-uhd_1440_2560_30fps.mp4",
+  mime_type: "video/mp4",
   images: [
     "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
   ]

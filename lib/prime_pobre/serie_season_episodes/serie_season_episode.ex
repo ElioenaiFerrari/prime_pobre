@@ -10,6 +10,7 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
     field :title, :string
     field :video_url, :string
     field :images, {:array, :string}
+    field :mime_type, :string
     belongs_to :season, SerieSeason
 
     timestamps(type: :utc_datetime)
@@ -18,7 +19,7 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
   @doc false
   def changeset(serie_season_episode, attrs) do
     serie_season_episode
-    |> cast(attrs, [:title, :description, :video_url, :images])
-    |> validate_required([:title, :description, :video_url, :images])
+    |> cast(attrs, [:title, :description, :video_url, :images, :mime_type])
+    |> validate_required([:title, :description, :video_url, :images, :mime_type])
   end
 end

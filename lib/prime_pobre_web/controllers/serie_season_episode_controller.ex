@@ -15,7 +15,7 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeController do
     with %SerieSeasonEpisode{} = episode <- SerieSeasonEpisodes.get_serie_season_episode!(id) do
       conn =
         conn
-        |> put_resp_content_type("video/mp4")
+        |> put_resp_content_type(episode.mime_type)
         |> send_chunked(:ok)
 
       HTTPoison.get!(episode.video_url, [], stream_to: self())
