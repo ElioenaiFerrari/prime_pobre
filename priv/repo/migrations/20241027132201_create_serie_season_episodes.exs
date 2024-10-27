@@ -4,7 +4,7 @@ defmodule PrimePobre.Repo.Migrations.CreateSerieSeasonEpisodes do
   def change do
     create table(:serie_season_episodes, primary_key: false) do
       add :id, :binary_id, primary_key: true
-      add :serie_season_id, references(:serie_seasons, on_delete: :delete_all, type: :binary_id)
+      add :season_id, references(:serie_seasons, on_delete: :delete_all, type: :binary_id)
       add :title, :string
       add :description, :string
       add :video_url, :string
