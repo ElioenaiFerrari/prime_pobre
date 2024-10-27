@@ -7,6 +7,7 @@ defmodule PrimePobre.Repo.Migrations.CreateSeries do
       add :title, :string
       add :description, :string
       add :images, {:array, :string}
+      add :genre, :string
 
       timestamps(type: :utc_datetime)
     end
