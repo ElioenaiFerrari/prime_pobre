@@ -10,6 +10,7 @@ defmodule PrimePobreWeb.Router do
 
     get "/movies/:id/stream", MovieController, :stream
     get "/movies", MovieController, :index
+    get "/movies/:id", MovieController, :show
     get "/series", SerieController, :index
     get "/series/:id", SerieController, :show
     get "/series/:id/seasons", SerieSeasonController, :index

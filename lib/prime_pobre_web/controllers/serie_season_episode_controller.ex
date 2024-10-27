@@ -56,7 +56,7 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeController do
            SerieSeasonEpisodes.create_serie_season_episode(serie_season_episode_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/serie_season_episodes/#{serie_season_episode}")
+      # |> put_resp_header("location", ~p"/api/serie_season_episodes/#{serie_season_episode}")
       |> render(:show, serie_season_episode: serie_season_episode)
     end
   end

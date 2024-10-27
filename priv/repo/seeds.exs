@@ -9,60 +9,24 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias PrimePobre.{Movies, Series, SerieSeasons, SerieSeasonEpisodes}
+alias PrimePobre.{Movies}
 
-Movies.create_movie(%{
-  title: "The Matrix",
-  description:
-    "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
-  video_url:
-    "https://drive.google.com/file/d/1_zcadQmwv6b1xpFyGEQGSbsOhKXKTmzAcg/view?usp=sharing",
-  mime_type: "video/x-msvideo",
-  images: [
-    "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  ],
-  genre: "Ação",
-  duration: 136
-})
-
-Movies.create_movie(%{
-  title: "The Matrix",
-  description:
-    "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
-  video_url:
-    "https://drive.google.com/file/d/1_zcadQmwv6b1xpFyGEQGSbsOhKXKTmzAcg/view?usp=sharing",
-  mime_type: "video/x-msvideo",
-  images: [
-    "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  ],
-  genre: "Ação",
-  duration: 136
-})
-
-{:ok, serie} =
-  Series.create_serie(%{
-    title: "Breaking Bad",
-    description:
-      "A high school chemistry teacher turned methamphetamine manufacturer partners with a former student to secure his family's future.",
-    images: [
-      "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-    ],
-    genre: "Drama"
-  })
-
-{:ok, season} =
-  SerieSeasons.create_serie_season(serie, %{
-    number: 1
-  })
-
-SerieSeasonEpisodes.create_serie_season_episode(season, %{
-  title: "Pilot",
-  description:
-    "Diagnosed with terminal lung cancer, a high school chemistry teacher resorts to cooking and selling methamphetamine to provide for his family.",
-  video_url: "https://videos.pexels.com/video-files/8953675/8953675-uhd_1440_2560_30fps.mp4",
-  mime_type: "video/mp4",
-  images: [
-    "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  ],
-  duration: 58
-})
+File.stream!("priv/repo/movies.csv")
+|> CSV.decode!(
+  escape_max_lines: 1000,
+  field_transform: &String.trim/1
+)
+|> Enum.with_index()
+|> Enum.each(fn {row, index} ->
+  if index != 0 do
+    Movies.create_movie(%{
+      title: Enum.at(row, 0),
+      description: Enum.at(row, 1),
+      video_url: Enum.at(row, 2),
+      images: Enum.at(row, 3) |> String.split("; "),
+      mime_type: Enum.at(row, 4),
+      genre: Enum.at(row, 5),
+      duration: Enum.at(row, 6)
+    })
+  end
+end)

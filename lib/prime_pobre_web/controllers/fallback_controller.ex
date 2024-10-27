@@ -21,4 +21,9 @@ defmodule PrimePobreWeb.FallbackController do
     |> put_view(html: PrimePobreWeb.ErrorHTML, json: PrimePobreWeb.ErrorJSON)
     |> render(:"404")
   end
+
+  def call(conn, :ok) do
+    conn
+    |> send_resp(:ok, "")
+  end
 end

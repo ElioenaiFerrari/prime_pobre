@@ -13,12 +13,15 @@ defmodule PrimePobreWeb.MovieController do
 
   def stream(conn, %{"id" => id}) do
     with %Movie{} = movie <- Movies.get_movie!(id) do
+      range_header = get_req_header(conn, "range")
+      range_header = if range_header != nil, do: range_header, else: "bytes=0-"
+
       conn =
         conn
         |> put_resp_content_type(movie.mime_type)
         |> send_chunked(:ok)
 
-      HTTPoison.get!(movie.video_url, [], stream_to: self())
+      HTTPoison.get!(movie.video_url, [], stream_to: self(), headers: [{"range", range_header}])
 
       stream_video_chunks(conn)
     end
@@ -37,7 +40,7 @@ defmodule PrimePobreWeb.MovieController do
         # O stream chegou ao fim
         :ok
 
-      %HTTPoison.Error{reason: reason} ->
+      %HTTPoison.Error{reason: _reason} ->
         # Um erro ocorreu, então termina a transmissão
         :ok
 
@@ -59,10 +62,10 @@ defmodule PrimePobreWeb.MovieController do
   #   end
   # end
 
-  # def show(conn, %{"id" => id}) do
-  #   movie = Movies.get_movie!(id)
-  #   render(conn, :show, movie: movie)
-  # end
+  def show(conn, %{"id" => id}) do
+    movie = Movies.get_movie!(id)
+    render(conn, :show, movie: movie)
+  end
 
   # def update(conn, %{"id" => id, "movie" => movie_params}) do
   #   movie = Movies.get_movie!(id)

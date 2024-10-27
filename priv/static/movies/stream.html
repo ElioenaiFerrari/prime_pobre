@@ -22,22 +22,42 @@
     </div>
 
     <script>
-      // Function to get query parameter by name
+      async function getMovie(id) {
+        try {
+          const response = await fetch(
+            `http://localhost:4000/api/movies/${id}`
+          );
+          const { data: movie } = await response.json();
+          return movie;
+        } catch (error) {
+          console.error('Error fetching movie:', error);
+        }
+      }
+
+      // Função para obter parâmetros da query string pelo nome
       function getQueryParam(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
       }
 
-      // Get the movie ID from the query parameter "id"
+      // Obter o ID do filme da query string "id"
       const movieId = getQueryParam('id');
 
-      // Set the video source URL if movieId is available
+      // Definir a URL do vídeo se o movieId estiver disponível
       if (movieId) {
-        const videoElement = document.getElementById('movie-video');
-        const sourceElement = document.createElement('source');
-        sourceElement.src = `http://localhost:4000/api/movies/${movieId}/stream`;
-        sourceElement.type = 'video/mp4';
-        videoElement.appendChild(sourceElement);
+        const movie = getMovie(movieId).then((movie) => {
+          const videoElement = document.getElementById('movie-video');
+          videoElement.poster = movie.images[0];
+          const sourceElement = document.createElement('source');
+          sourceElement.src = `http://localhost:4000/api/movies/${movieId}/stream`;
+          sourceElement.type = 'video/mp4';
+          videoElement.appendChild(sourceElement);
+
+          // Carregar o vídeo
+          videoElement.load();
+        });
+      } else {
+        console.error('Movie ID is not provided in the URL.');
       }
     </script>
   </body>
