@@ -10,6 +10,15 @@ defmodule PrimePobreWeb.Router do
 
     get "/movies/:id/stream", MovieController, :stream
     get "/movies", MovieController, :index
+    get "/series", SerieController, :index
+    get "/series/:id", SerieController, :show
+    get "/series/:id/seasons", SerieSeasonController, :index
+    get "/seasons/:id", SerieSeasonController, :show
+    get "/seasons/:id/episodes", SerieSeasonEpisodeController, :index
+
+    get "/series/:serie_id/seasons/:season_id/episodes/:id/stream",
+        SerieSeasonEpisodeController,
+        :stream
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
