@@ -46,7 +46,8 @@ defmodule PrimePobre.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:httpoison, "~> 2.2"},
-      {:cors_plug, "~> 3.0"}
+      {:cors_plug, "~> 3.0"},
+      {:csv, "~> 3.2"}
     ]
   end
 
