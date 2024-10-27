@@ -37,10 +37,6 @@ defmodule PrimePobreWeb.MovieController do
         # O stream chegou ao fim
         :ok
 
-      {:error, :closed} ->
-        # A conexão foi fechada, então termina a transmissão
-        :ok
-
       %HTTPoison.Error{reason: reason} ->
         # Um erro ocorreu, então termina a transmissão
         IO.inspect(reason)

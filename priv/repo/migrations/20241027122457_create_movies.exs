@@ -7,6 +7,7 @@ defmodule PrimePobre.Repo.Migrations.CreateMovies do
       add :title, :string
       add :description, :string
       add :file_url, :string
+      add :images, {:array, :string}
 
       timestamps(type: :utc_datetime)
     end

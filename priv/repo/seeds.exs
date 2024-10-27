@@ -15,5 +15,8 @@ Movies.create_movie(%{
   title: "The Matrix",
   description:
     "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
-  file_url: "https://videos.pexels.com/video-files/8953675/8953675-uhd_1440_2560_30fps.mp4"
+  file_url: "https://videos.pexels.com/video-files/8953675/8953675-uhd_1440_2560_30fps.mp4",
+  images: [
+    "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  ]
 })

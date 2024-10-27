@@ -8,6 +8,7 @@ defmodule PrimePobre.Movies.Movie do
     field :description, :string
     field :title, :string
     field :file_url, :string
+    field :images, {:array, :string}
 
     timestamps(type: :utc_datetime)
   end
@@ -15,7 +16,7 @@ defmodule PrimePobre.Movies.Movie do
   @doc false
   def changeset(movie, attrs) do
     movie
-    |> cast(attrs, [:title, :description, :file_url])
-    |> validate_required([:title, :description, :file_url])
+    |> cast(attrs, [:title, :description, :file_url, :images])
+    |> validate_required([:title, :description, :file_url, :images])
   end
 end

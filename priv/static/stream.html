@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-900 text-white">
+    <div class="flex items-center justify-center min-h-screen">
+      <video
+        id="movie-video"
+        controls
+        autoplay
+        class="w-full max-w-4xl rounded-lg shadow-lg max-h-96"
+      >
+        Seu navegador não suporta o elemento de vídeo.
+      </video>
+    </div>
+
+    <script>
+      // Function to get query parameter by name
+      function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      // Get the movie ID from the query parameter "id"
+      const movieId = getQueryParam('id');
+
+      // Set the video source URL if movieId is available
+      if (movieId) {
+        const videoElement = document.getElementById('movie-video');
+        const sourceElement = document.createElement('source');
+        sourceElement.src = `http://localhost:4000/api/movies/${movieId}/stream`;
+        sourceElement.type = 'video/mp4';
+        videoElement.appendChild(sourceElement);
+      }
+    </script>
+  </body>
+</html>

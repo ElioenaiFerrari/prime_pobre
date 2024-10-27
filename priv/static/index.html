@@ -3,15 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Movies</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <video controls autoplay>
-      <source
-        src="http://localhost:4000/api/movies/6e59b2d7-2b0f-4644-a377-7b6d0360de4f/stream"
-        type="video/mp4"
-      />
-      Seu navegador não suporta o elemento de vídeo.
-    </video>
+  <body class="bg-gray-900 text-white">
+    <div class="container mx-auto p-4">
+      <h1 class="text-3xl font-bold mb-4">Movies</h1>
+      <div
+        id="movies"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      ></div>
+    </div>
+
+    <script>
+      async function fetchMovies() {
+        try {
+          const response = await fetch('http://localhost:4000/api/movies');
+          const { data: movies } = await response.json();
+          renderMovies(movies);
+        } catch (error) {
+          console.error('Error fetching movies:', error);
+        }
+      }
+
+      function renderMovies(movies) {
+        const moviesContainer = document.getElementById('movies');
+        moviesContainer.innerHTML = '';
+
+        movies.forEach((movie) => {
+          const movieElement = document.createElement('div');
+          movieElement.className = 'bg-gray-800 p-4 rounded-lg shadow-lg';
+
+          movieElement.innerHTML = `
+          <h2 class="text-xl font-bold mb-2">${movie.title}</h2>
+          <p class="mb-4">${movie.description}</p>
+          <div class="mb-4">
+            ${movie.images
+              .map(
+                (url) =>
+                  `<img src="${url}" alt="${movie.title}" class="w-full h-auto mb-2 rounded">`
+              )
+              .join('')}
+          </div>
+          <a href="./stream.html?id=${
+            movie.id
+          }" class="text-blue-400 hover:underline">Stream</a>
+        `;
+
+          moviesContainer.appendChild(movieElement);
+        });
+      }
+
+      fetchMovies();
+    </script>
   </body>
 </html>
