@@ -16,6 +16,12 @@
         id="movies"
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
       ></div>
+
+      <h1 class="text-3xl font-bold mb-4">Series</h1>
+      <div
+        id="series"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      ></div>
     </div>
 
     <script>
@@ -57,7 +63,46 @@
         });
       }
 
+      async function fetchSeries() {
+        try {
+          const response = await fetch('http://localhost:4000/api/series');
+          const { data: series } = await response.json();
+          renderSeries(series);
+        } catch (error) {
+          console.error('Error fetching series:', error);
+        }
+      }
+
+      function renderSeries(series) {
+        const seriesContainer = document.getElementById('series');
+        seriesContainer.innerHTML = '';
+
+        series.forEach((serie) => {
+          const serieElement = document.createElement('div');
+          serieElement.className = 'bg-gray-800 p-4 rounded-lg shadow-lg';
+
+          serieElement.innerHTML = `
+          <h2 class="text-xl font-bold mb-2">${serie.title}</h2>
+          <p class="mb-4">${serie.description}</p>
+          <div class="mb-4">
+            ${serie.images
+              .map(
+                (url) =>
+                  `<img src="${url}" alt="${serie.title}" class="w-full h-auto mb-2 rounded">`
+              )
+              .join('')}
+          </div>
+          <a href="./series/seasons.html?id=${
+            serie.id
+          }" class="text-blue-400 hover:underline">Seasons</a>
+        `;
+
+          seriesContainer.appendChild(serieElement);
+        });
+      }
+
       fetchMovies();
+      fetchSeries();
     </script>
   </body>
 </html>

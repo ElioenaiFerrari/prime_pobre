@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Series Seasons</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-900 text-white">
+    <div class="container mx-auto p-6">
+      <h1 class="text-3xl font-bold mb-6">Seasons</h1>
+      <div
+        id="seasons-container"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+      ></div>
+    </div>
+
+    <script>
+      // Function to get query parameter
+      function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      // Fetch seasons from API
+      async function fetchSeasons() {
+        const serieId = getQueryParam('id');
+        const response = await fetch(
+          `http://localhost:4000/api/series/${serieId}/seasons`
+        );
+        const { data: seasons } = await response.json();
+
+        const seasonsContainer = document.getElementById('seasons-container');
+
+        seasons.forEach((season) => {
+          const seasonCard = document.createElement('div');
+          seasonCard.className =
+            'bg-gray-800 rounded-lg p-4 shadow-md transition hover:bg-gray-700 cursor-pointer';
+          seasonCard.innerHTML = `
+                    <h2 class="text-xl font-semibold">Season ${season.number}</h2>
+                `;
+
+          // Navigate to episodes page on click
+          seasonCard.onclick = () => {
+            window.location.href = `./episodes.html?id=${serieId}&season_id=${season.id}`;
+          };
+
+          seasonsContainer.appendChild(seasonCard);
+        });
+      }
+
+      // Call the fetch function
+      fetchSeasons();
+    </script>
+  </body>
+</html>

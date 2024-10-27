@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Stream</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -28,16 +28,19 @@
         return urlParams.get(name);
       }
 
-      // Get the movie ID from the query parameter "id"
-      const movieId = getQueryParam('id');
+      // Get the episode ID, series ID, and season ID from the query parameters
+      const serieId = getQueryParam('id');
+      const seasonId = getQueryParam('season_id');
+      const episodeId = getQueryParam('episode_id');
 
-      // Set the video source URL if movieId is available
-      if (movieId) {
+      // Set the video source URL if episodeId is available
+      if (episodeId && serieId && seasonId) {
         const videoElement = document.getElementById('movie-video');
         const sourceElement = document.createElement('source');
-        sourceElement.src = `http://localhost:4000/api/movies/${movieId}/stream`;
-        sourceElement.type = 'video/mp4';
+        sourceElement.src = `http://localhost:4000/api/series/${serieId}/seasons/${seasonId}/episodes/${episodeId}/stream`;
+        sourceElement.type = 'video/mp4'; // Adjust based on your stream format
         videoElement.appendChild(sourceElement);
+        videoElement.load(); // Load the video with the new source
       }
     </script>
   </body>
