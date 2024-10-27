@@ -7,6 +7,7 @@ defmodule PrimePobre.SerieSeasonEpisodes do
   alias PrimePobre.Repo
 
   alias PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode
+  alias PrimePobre.SerieSeasons.SerieSeason
 
   @doc """
   Returns the list of serie_season_episodes.
@@ -49,9 +50,10 @@ defmodule PrimePobre.SerieSeasonEpisodes do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_serie_season_episode(attrs \\ %{}) do
+  def create_serie_season_episode(%SerieSeason{} = season, attrs \\ %{}) do
     %SerieSeasonEpisode{}
     |> SerieSeasonEpisode.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:season, season)
     |> Repo.insert()
   end
 

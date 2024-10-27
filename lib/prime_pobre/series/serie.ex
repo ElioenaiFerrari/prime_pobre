@@ -10,7 +10,7 @@ defmodule PrimePobre.Series.Serie do
     field :title, :string
     field :images, {:array, :string}
     field :video_url, :string
-    has_many :serie_seasons, SerieSeason, on_delete: :delete_all
+    has_many :seasons, SerieSeason, on_delete: :delete_all
 
     timestamps(type: :utc_datetime)
   end
