@@ -8,7 +8,7 @@ defmodule PrimePobre.MoviesTest do
 
     import PrimePobre.MoviesFixtures
 
-    @invalid_attrs %{description: nil, title: nil, file_url: nil}
+    @invalid_attrs %{description: nil, title: nil, video_url: nil}
 
     test "list_movies/0 returns all movies" do
       movie = movie_fixture()
@@ -21,12 +21,16 @@ defmodule PrimePobre.MoviesTest do
     end
 
     test "create_movie/1 with valid data creates a movie" do
-      valid_attrs = %{description: "some description", title: "some title", file_url: "some file_url"}
+      valid_attrs = %{
+        description: "some description",
+        title: "some title",
+        video_url: "some video_url"
+      }
 
       assert {:ok, %Movie{} = movie} = Movies.create_movie(valid_attrs)
       assert movie.description == "some description"
       assert movie.title == "some title"
-      assert movie.file_url == "some file_url"
+      assert movie.video_url == "some video_url"
     end
 
     test "create_movie/1 with invalid data returns error changeset" do
@@ -35,12 +39,17 @@ defmodule PrimePobre.MoviesTest do
 
     test "update_movie/2 with valid data updates the movie" do
       movie = movie_fixture()
-      update_attrs = %{description: "some updated description", title: "some updated title", file_url: "some updated file_url"}
+
+      update_attrs = %{
+        description: "some updated description",
+        title: "some updated title",
+        video_url: "some updated video_url"
+      }
 
       assert {:ok, %Movie{} = movie} = Movies.update_movie(movie, update_attrs)
       assert movie.description == "some updated description"
       assert movie.title == "some updated title"
-      assert movie.file_url == "some updated file_url"
+      assert movie.video_url == "some updated video_url"
     end
 
     test "update_movie/2 with invalid data returns error changeset" do

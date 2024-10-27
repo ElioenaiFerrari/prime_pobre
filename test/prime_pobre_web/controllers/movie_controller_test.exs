@@ -8,14 +8,14 @@ defmodule PrimePobreWeb.MovieControllerTest do
   @create_attrs %{
     description: "some description",
     title: "some title",
-    file_url: "some file_url"
+    video_url: "some video_url"
   }
   @update_attrs %{
     description: "some updated description",
     title: "some updated title",
-    file_url: "some updated file_url"
+    video_url: "some updated video_url"
   }
-  @invalid_attrs %{description: nil, title: nil, file_url: nil}
+  @invalid_attrs %{description: nil, title: nil, video_url: nil}
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -38,7 +38,7 @@ defmodule PrimePobreWeb.MovieControllerTest do
       assert %{
                "id" => ^id,
                "description" => "some description",
-               "file_url" => "some file_url",
+               "video_url" => "some video_url",
                "title" => "some title"
              } = json_response(conn, 200)["data"]
     end
@@ -61,7 +61,7 @@ defmodule PrimePobreWeb.MovieControllerTest do
       assert %{
                "id" => ^id,
                "description" => "some updated description",
-               "file_url" => "some updated file_url",
+               "video_url" => "some updated video_url",
                "title" => "some updated title"
              } = json_response(conn, 200)["data"]
     end

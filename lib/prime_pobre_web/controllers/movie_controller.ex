@@ -18,7 +18,7 @@ defmodule PrimePobreWeb.MovieController do
         |> put_resp_content_type("video/mp4")
         |> send_chunked(:ok)
 
-      HTTPoison.get!(movie.file_url, [], stream_to: self())
+      HTTPoison.get!(movie.video_url, [], stream_to: self())
 
       stream_video_chunks(conn)
     end

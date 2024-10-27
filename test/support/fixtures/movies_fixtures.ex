@@ -12,7 +12,7 @@ defmodule PrimePobre.MoviesFixtures do
       attrs
       |> Enum.into(%{
         description: "some description",
-        file_url: "some file_url",
+        video_url: "some video_url",
         title: "some title"
       })
       |> PrimePobre.Movies.create_movie()
