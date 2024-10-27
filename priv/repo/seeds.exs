@@ -20,7 +20,9 @@ Movies.create_movie(%{
   mime_type: "video/x-msvideo",
   images: [
     "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  ]
+  ],
+  genre: "Ação",
+  duration: 136
 })
 
 {:ok, serie} =
@@ -30,7 +32,8 @@ Movies.create_movie(%{
       "A high school chemistry teacher turned methamphetamine manufacturer partners with a former student to secure his family's future.",
     images: [
       "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-    ]
+    ],
+    genre: "Drama"
   })
 
 {:ok, season} =
@@ -46,5 +49,6 @@ SerieSeasonEpisodes.create_serie_season_episode(season, %{
   mime_type: "video/mp4",
   images: [
     "https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  ]
+  ],
+  duration: 58
 })
