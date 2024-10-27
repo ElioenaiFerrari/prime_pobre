@@ -9,24 +9,41 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-alias PrimePobre.{Movies}
+alias PrimePobre.{Movies, Series, SerieSeasons, SerieSeasonEpisodes}
 
-File.stream!("priv/repo/movies.csv")
-|> CSV.decode!(
-  escape_max_lines: 1000,
-  field_transform: &String.trim/1
-)
-|> Enum.with_index()
-|> Enum.each(fn {row, index} ->
-  if index != 0 do
-    Movies.create_movie(%{
-      title: Enum.at(row, 0),
-      description: Enum.at(row, 1),
-      video_url: Enum.at(row, 2),
-      images: Enum.at(row, 3) |> String.split("; "),
-      mime_type: Enum.at(row, 4),
-      genre: Enum.at(row, 5),
-      duration: Enum.at(row, 6)
-    })
-  end
-end)
+Movies.create_movie(%{
+  title: "Radio Pesadelo",
+  description:
+    "A radio station in the middle of nowhere becomes the center of a zombie invasion.",
+  video_url: "file://radio_pesadelo.mkv",
+  images:
+    "https://www.justwatch.com/images/backdrop/319854719/s640/radio-pesadelo/radio-pesadelo",
+  mime_type: "video/mp4",
+  genre: "Horror",
+  duration: 90
+})
+
+{:ok, serie} =
+  Series.create_serie(%{
+    title: "O Senhor dos Anéis",
+    description:
+      "A young hobbit, Frodo, who has found the One Ring that belongs to the Dark Lord Sauron, begins his journey with eight companions to Mount Doom, the only place where it can be destroyed.",
+    images: ["https://image.tmdb.org/t/p/w342/9mZhIun3HhIUi2jneZzm5D20ZTj.jpg"],
+    genre: "Fantasia"
+  })
+
+{:ok, season} =
+  SerieSeasons.create_season(serie, %{
+    number: 2
+  })
+
+SerieSeasonEpisodes.create_episode(season, %{
+  title: "The Fellowship of the Ring",
+  description:
+    "A young hobbit, Frodo, who has found the One Ring that belongs to the Dark Lord Sauron, begins his journey with eight companions to Mount Doom, the only place where it can be destroyed.",
+  video_url: "file://lord_of_the_ring",
+  images: ["https://image.tmdb.org/t/p/w342/9mZhIun3HhIUi2jneZzm5D20ZTj.jpg"],
+  mime_type: "video/mp4",
+  duration: 178,
+  number: 1
+})

@@ -12,6 +12,7 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
     field :images, {:array, :string}
     field :mime_type, :string
     field :duration, :integer
+    field :number, :integer
     belongs_to :season, SerieSeason
 
     timestamps(type: :utc_datetime)
@@ -26,7 +27,8 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
       :video_url,
       :images,
       :mime_type,
-      :duration
+      :duration,
+      :number
     ])
     |> validate_required([
       :title,
@@ -34,7 +36,8 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
       :video_url,
       :images,
       :mime_type,
-      :duration
+      :duration,
+      :number
     ])
   end
 end

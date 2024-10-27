@@ -19,7 +19,7 @@ defmodule PrimePobre.SerieSeasons do
 
   """
   def list_serie_seasons do
-    Repo.all(SerieSeason)
+    Repo.all(from ss in SerieSeason, order_by: [asc: ss.number])
   end
 
   @doc """

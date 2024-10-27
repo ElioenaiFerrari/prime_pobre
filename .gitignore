@@ -27,3 +27,4 @@ prime_pobre-*.tar
 
 .env
 priv/movies
+priv/series
