@@ -12,7 +12,8 @@ defmodule PrimePobreWeb.SerieSeasonController do
   end
 
   def create(conn, %{"serie_season" => serie_season_params}) do
-    with {:ok, %SerieSeason{} = serie_season} <- SerieSeasons.create_serie_season(serie_season_params) do
+    with {:ok, %SerieSeason{} = serie_season} <-
+           SerieSeasons.create_serie_season(serie_season_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", ~p"/api/serie_seasons/#{serie_season}")
@@ -28,7 +29,8 @@ defmodule PrimePobreWeb.SerieSeasonController do
   def update(conn, %{"id" => id, "serie_season" => serie_season_params}) do
     serie_season = SerieSeasons.get_serie_season!(id)
 
-    with {:ok, %SerieSeason{} = serie_season} <- SerieSeasons.update_serie_season(serie_season, serie_season_params) do
+    with {:ok, %SerieSeason{} = serie_season} <-
+           SerieSeasons.update_serie_season(serie_season, serie_season_params) do
       render(conn, :show, serie_season: serie_season)
     end
   end
