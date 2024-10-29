@@ -8,16 +8,16 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeControllerTest do
   @create_attrs %{
     description: "some description",
     title: "some title",
-    video_url: "some video_url",
+    media: "some media",
     images: "some images"
   }
   @update_attrs %{
     description: "some updated description",
     title: "some updated title",
-    video_url: "some updated video_url",
+    media: "some updated media",
     images: "some updated images"
   }
-  @invalid_attrs %{description: nil, title: nil, video_url: nil, images: nil}
+  @invalid_attrs %{description: nil, title: nil, media: nil, images: nil}
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -42,7 +42,7 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeControllerTest do
                "description" => "some description",
                "images" => "some images",
                "title" => "some title",
-               "video_url" => "some video_url"
+               "media" => "some media"
              } = json_response(conn, 200)["data"]
     end
 
@@ -55,8 +55,15 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeControllerTest do
   describe "update serie_season_episode" do
     setup [:create_serie_season_episode]
 
-    test "renders serie_season_episode when data is valid", %{conn: conn, serie_season_episode: %SerieSeasonEpisode{id: id} = serie_season_episode} do
-      conn = put(conn, ~p"/api/serie_season_episodes/#{serie_season_episode}", serie_season_episode: @update_attrs)
+    test "renders serie_season_episode when data is valid", %{
+      conn: conn,
+      serie_season_episode: %SerieSeasonEpisode{id: id} = serie_season_episode
+    } do
+      conn =
+        put(conn, ~p"/api/serie_season_episodes/#{serie_season_episode}",
+          serie_season_episode: @update_attrs
+        )
+
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
       conn = get(conn, ~p"/api/serie_season_episodes/#{id}")
@@ -66,12 +73,19 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeControllerTest do
                "description" => "some updated description",
                "images" => "some updated images",
                "title" => "some updated title",
-               "video_url" => "some updated video_url"
+               "media" => "some updated media"
              } = json_response(conn, 200)["data"]
     end
 
-    test "renders errors when data is invalid", %{conn: conn, serie_season_episode: serie_season_episode} do
-      conn = put(conn, ~p"/api/serie_season_episodes/#{serie_season_episode}", serie_season_episode: @invalid_attrs)
+    test "renders errors when data is invalid", %{
+      conn: conn,
+      serie_season_episode: serie_season_episode
+    } do
+      conn =
+        put(conn, ~p"/api/serie_season_episodes/#{serie_season_episode}",
+          serie_season_episode: @invalid_attrs
+        )
+
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -79,7 +93,10 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeControllerTest do
   describe "delete serie_season_episode" do
     setup [:create_serie_season_episode]
 
-    test "deletes chosen serie_season_episode", %{conn: conn, serie_season_episode: serie_season_episode} do
+    test "deletes chosen serie_season_episode", %{
+      conn: conn,
+      serie_season_episode: serie_season_episode
+    } do
       conn = delete(conn, ~p"/api/serie_season_episodes/#{serie_season_episode}")
       assert response(conn, 204)
 

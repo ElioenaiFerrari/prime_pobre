@@ -6,7 +6,8 @@ defmodule PrimePobre.Repo.Migrations.CreateMovies do
       add :id, :binary_id, primary_key: true
       add :title, :string
       add :description, :string
-      add :video_url, :string
+      add :media, :string
+      add :source, :string
       add :images, {:array, :string}
       add :mime_type, :string
       add :genre, :string

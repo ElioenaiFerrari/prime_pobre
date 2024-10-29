@@ -20,7 +20,7 @@ defmodule PrimePobreWeb.MovieJSON do
       id: movie.id,
       title: movie.title,
       description: movie.description,
-      video_url: movie.video_url,
+      media: movie.media,
       images: movie.images,
       genre: movie.genre,
       duration: movie.duration

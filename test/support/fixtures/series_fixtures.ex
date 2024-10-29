@@ -14,7 +14,7 @@ defmodule PrimePobre.SeriesFixtures do
         description: "some description",
         images: "some images",
         title: "some title",
-        video_url: "some video_url"
+        media: "some media"
       })
       |> PrimePobre.Series.create_serie()
 

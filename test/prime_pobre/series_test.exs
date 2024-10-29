@@ -8,7 +8,7 @@ defmodule PrimePobre.SeriesTest do
 
     import PrimePobre.SeriesFixtures
 
-    @invalid_attrs %{description: nil, title: nil, images: nil, video_url: nil}
+    @invalid_attrs %{description: nil, title: nil, images: nil, media: nil}
 
     test "list_series/0 returns all series" do
       serie = serie_fixture()
@@ -21,13 +21,18 @@ defmodule PrimePobre.SeriesTest do
     end
 
     test "create_serie/1 with valid data creates a serie" do
-      valid_attrs = %{description: "some description", title: "some title", images: "some images", video_url: "some video_url"}
+      valid_attrs = %{
+        description: "some description",
+        title: "some title",
+        images: "some images",
+        media: "some media"
+      }
 
       assert {:ok, %Serie{} = serie} = Series.create_serie(valid_attrs)
       assert serie.description == "some description"
       assert serie.title == "some title"
       assert serie.images == "some images"
-      assert serie.video_url == "some video_url"
+      assert serie.media == "some media"
     end
 
     test "create_serie/1 with invalid data returns error changeset" do
@@ -36,13 +41,19 @@ defmodule PrimePobre.SeriesTest do
 
     test "update_serie/2 with valid data updates the serie" do
       serie = serie_fixture()
-      update_attrs = %{description: "some updated description", title: "some updated title", images: "some updated images", video_url: "some updated video_url"}
+
+      update_attrs = %{
+        description: "some updated description",
+        title: "some updated title",
+        images: "some updated images",
+        media: "some updated media"
+      }
 
       assert {:ok, %Serie{} = serie} = Series.update_serie(serie, update_attrs)
       assert serie.description == "some updated description"
       assert serie.title == "some updated title"
       assert serie.images == "some updated images"
-      assert serie.video_url == "some updated video_url"
+      assert serie.media == "some updated media"
     end
 
     test "update_serie/2 with invalid data returns error changeset" do

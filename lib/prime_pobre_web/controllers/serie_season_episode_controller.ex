@@ -49,14 +49,15 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeController do
     {start, min(end_pos, file_size - 1)}
   end
 
-  @video_dir "priv/series"
+  @media_dir "priv/static"
   defp stream_video_chunks(
          conn,
          %SerieSeasonEpisode{
-           video_url: "file://" <> filename
+           source: "file",
+           media: media
          } = episode
        ) do
-    path = Path.join(@video_dir, filename)
+    path = Path.join(@media_dir, media)
 
     if File.exists?(path) do
       file_size = File.stat!(path).size
@@ -95,7 +96,8 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeController do
   defp stream_video_chunks(
          conn,
          %SerieSeasonEpisode{
-           video_url: "https://" <> _
+           source: "remote",
+           media: media
          } = episode
        ) do
     conn =
@@ -103,7 +105,7 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeController do
       |> put_resp_content_type(episode.mime_type)
       |> send_chunked(:ok)
 
-    HTTPoison.get!(episode.video_url, [], stream_to: self())
+    HTTPoison.get!(media, [], stream_to: self())
 
     receive do
       %HTTPoison.AsyncChunk{chunk: chunk} ->

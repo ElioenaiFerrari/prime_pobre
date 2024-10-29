@@ -49,14 +49,15 @@ defmodule PrimePobreWeb.MovieController do
     {start, min(end_pos, file_size - 1)}
   end
 
-  @video_dir "priv/movies"
+  @media_dir "priv/static"
   defp stream_video_chunks(
          conn,
          %Movie{
-           video_url: "file://" <> filename
+           source: "file",
+           media: media
          } = movie
        ) do
-    path = Path.join(@video_dir, filename)
+    path = Path.join(@media_dir, media)
 
     if File.exists?(path) do
       file_size = File.stat!(path).size
@@ -95,7 +96,8 @@ defmodule PrimePobreWeb.MovieController do
   defp stream_video_chunks(
          conn,
          %Movie{
-           video_url: "https://" <> _
+           source: "remote",
+           media: media
          } = movie
        ) do
     conn =
@@ -103,7 +105,7 @@ defmodule PrimePobreWeb.MovieController do
       |> put_resp_content_type(movie.mime_type)
       |> send_chunked(:ok)
 
-    HTTPoison.get!(movie.video_url, [], stream_to: self())
+    HTTPoison.get!(media, [], stream_to: self())
 
     receive do
       %HTTPoison.AsyncChunk{chunk: chunk} ->

@@ -2,13 +2,15 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
   use Ecto.Schema
   import Ecto.Changeset
   alias PrimePobre.SerieSeasons.SerieSeason
+  @sources ~w(file remote)a
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "serie_season_episodes" do
     field :description, :string
     field :title, :string
-    field :video_url, :string
+    field :media, :string
+    field :source, :string
     field :images, {:array, :string}
     field :mime_type, :string
     field :duration, :integer
@@ -24,7 +26,8 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
     |> cast(attrs, [
       :title,
       :description,
-      :video_url,
+      :media,
+      :source,
       :images,
       :mime_type,
       :duration,
@@ -33,11 +36,13 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
     |> validate_required([
       :title,
       :description,
-      :video_url,
+      :media,
+      :source,
       :images,
       :mime_type,
       :duration,
       :number
     ])
+    |> validate_inclusion(:source, @sources)
   end
 end

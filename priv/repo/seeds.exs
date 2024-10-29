@@ -15,7 +15,8 @@ Movies.create_movie(%{
   title: "Radio Pesadelo",
   description:
     "A radio station in the middle of nowhere becomes the center of a zombie invasion.",
-  video_url: "file://radio_pesadelo.mkv",
+  media: "movies/radio_pesadelo.mkv",
+  source: "file",
   images: [
     "https://www.justwatch.com/images/backdrop/319854719/s640/radio-pesadelo/radio-pesadelo"
   ],
@@ -42,7 +43,8 @@ SerieSeasonEpisodes.create_serie_season_episode(season, %{
   title: "The Fellowship of the Ring",
   description:
     "A young hobbit, Frodo, who has found the One Ring that belongs to the Dark Lord Sauron, begins his journey with eight companions to Mount Doom, the only place where it can be destroyed.",
-  video_url: "file://peaky_blinders_s01e01.ts",
+  media: "series/peaky_blinders/S01E01.mkv",
+  source: "file",
   images: ["https://gizmodo.uol.com.br/wp-content/blogs.dir/8/files/2023/07/peaky-blinders.jpg"],
   mime_type: "video/mp2t",
   duration: 178,

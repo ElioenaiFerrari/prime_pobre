@@ -7,7 +7,8 @@ defmodule PrimePobre.Repo.Migrations.CreateSerieSeasonEpisodes do
       add :season_id, references(:serie_seasons, on_delete: :delete_all, type: :binary_id)
       add :title, :string
       add :description, :string
-      add :video_url, :string
+      add :media, :string
+      add :source, :string
       add :images, {:array, :string}
       add :mime_type, :string
       add :duration, :integer

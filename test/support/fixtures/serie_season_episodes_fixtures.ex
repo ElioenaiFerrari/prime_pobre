@@ -14,7 +14,7 @@ defmodule PrimePobre.SerieSeasonEpisodesFixtures do
         description: "some description",
         images: "some images",
         title: "some title",
-        video_url: "some video_url"
+        media: "some media"
       })
       |> PrimePobre.SerieSeasonEpisodes.create_serie_season_episode()
 

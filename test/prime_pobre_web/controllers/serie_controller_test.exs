@@ -9,15 +9,15 @@ defmodule PrimePobreWeb.SerieControllerTest do
     description: "some description",
     title: "some title",
     images: "some images",
-    video_url: "some video_url"
+    media: "some media"
   }
   @update_attrs %{
     description: "some updated description",
     title: "some updated title",
     images: "some updated images",
-    video_url: "some updated video_url"
+    media: "some updated media"
   }
-  @invalid_attrs %{description: nil, title: nil, images: nil, video_url: nil}
+  @invalid_attrs %{description: nil, title: nil, images: nil, media: nil}
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -42,7 +42,7 @@ defmodule PrimePobreWeb.SerieControllerTest do
                "description" => "some description",
                "images" => "some images",
                "title" => "some title",
-               "video_url" => "some video_url"
+               "media" => "some media"
              } = json_response(conn, 200)["data"]
     end
 
@@ -66,7 +66,7 @@ defmodule PrimePobreWeb.SerieControllerTest do
                "description" => "some updated description",
                "images" => "some updated images",
                "title" => "some updated title",
-               "video_url" => "some updated video_url"
+               "media" => "some updated media"
              } = json_response(conn, 200)["data"]
     end
 

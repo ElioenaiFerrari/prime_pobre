@@ -20,7 +20,7 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeJSON do
       id: serie_season_episode.id,
       title: serie_season_episode.title,
       description: serie_season_episode.description,
-      video_url: serie_season_episode.video_url,
+      media: serie_season_episode.media,
       images: serie_season_episode.images,
       duration: serie_season_episode.duration
     }

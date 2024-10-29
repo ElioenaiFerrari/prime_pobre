@@ -26,5 +26,5 @@ erl_crash.dump
 prime_pobre-*.tar
 
 .env
-priv/movies
-priv/series
+priv/static/movies
+priv/static/series
