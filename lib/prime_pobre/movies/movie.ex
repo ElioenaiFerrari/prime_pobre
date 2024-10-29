@@ -10,7 +10,7 @@ defmodule PrimePobre.Movies.Movie do
     field :title, :string
     field :media, :string
     field :source, :string
-    field :images, {:array, :string}
+    field :thumbnail_url, :string
     field :mime_type, :string
     field :genre, :string
     field :duration, :integer
@@ -26,7 +26,7 @@ defmodule PrimePobre.Movies.Movie do
       :description,
       :media,
       :source,
-      :images,
+      :thumbnail_url,
       :mime_type,
       :genre,
       :duration
@@ -36,7 +36,7 @@ defmodule PrimePobre.Movies.Movie do
       :description,
       :media,
       :source,
-      :images,
+      :thumbnail_url,
       :mime_type,
       :genre,
       :duration

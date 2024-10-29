@@ -11,7 +11,7 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
     field :title, :string
     field :media, :string
     field :source, :string
-    field :images, {:array, :string}
+    field :thumbnail_url, :string
     field :mime_type, :string
     field :duration, :integer
     field :number, :integer
@@ -28,7 +28,7 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
       :description,
       :media,
       :source,
-      :images,
+      :thumbnail_url,
       :mime_type,
       :duration,
       :number
@@ -38,7 +38,7 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
       :description,
       :media,
       :source,
-      :images,
+      :thumbnail_url,
       :mime_type,
       :duration,
       :number

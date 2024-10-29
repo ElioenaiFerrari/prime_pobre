@@ -54,16 +54,9 @@
                 <h3 class="text-xl font-bold mb-2">${movie.title}</h3>
                 <p class="mb-4 text-gray-300">${movie.description}</p>
                 <div class="mb-4">
-                    ${movie.images
-                      .map(
-                        (url) =>
-                          `<img src="${url}" alt="${movie.title}" class="w-full h-96 mb-2 rounded-lg shadow-md">`
-                      )
-                      .join('')}
+                   <img src="${movie.thumbnail_url}" alt="${movie.title}" class="w-full h-96 mb-2 rounded-lg shadow-md">
                 </div>
-                <a href="./movies/stream.html?id=${
-                  movie.id
-                }" class="text-blue-400 hover:underline font-semibold">Stream</a>
+                <a href="./movies/stream.html?id=${movie.id}" class="text-blue-400 hover:underline font-semibold">Stream</a>
             `;
 
           moviesContainer.appendChild(movieElement);
@@ -93,16 +86,9 @@
                 <h3 class="text-xl font-bold mb-2">${serie.title}</h3>
                 <p class="mb-4 text-gray-300">${serie.description}</p>
                 <div class="mb-4">
-                    ${serie.images
-                      .map(
-                        (url) =>
-                          `<img src="${url}" alt="${serie.title}" class="w-full h-96 mb-2 rounded-lg shadow-md">`
-                      )
-                      .join('')}
+                   <img src="${serie.thumbnail_url}" alt="${serie.title}" class="w-full h-96 mb-2 rounded-lg shadow-md">
                 </div>
-                <a href="./series/seasons.html?id=${
-                  serie.id
-                }" class="text-blue-400 hover:underline font-semibold">Seasons</a>
+                <a href="./series/seasons.html?id=${serie.id}" class="text-blue-400 hover:underline font-semibold">Seasons</a>
             `;
 
           seriesContainer.appendChild(serieElement);

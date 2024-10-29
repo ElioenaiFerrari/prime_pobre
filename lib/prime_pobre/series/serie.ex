@@ -8,7 +8,6 @@ defmodule PrimePobre.Series.Serie do
   schema "series" do
     field :description, :string
     field :title, :string
-    field :images, {:array, :string}
     field :genre, :string
     has_many :seasons, SerieSeason, on_delete: :delete_all
 
@@ -18,7 +17,7 @@ defmodule PrimePobre.Series.Serie do
   @doc false
   def changeset(serie, attrs) do
     serie
-    |> cast(attrs, [:title, :description, :images, :genre])
-    |> validate_required([:title, :description, :images, :genre])
+    |> cast(attrs, [:title, :description,  :genre])
+    |> validate_required([:title, :description, :genre])
   end
 end

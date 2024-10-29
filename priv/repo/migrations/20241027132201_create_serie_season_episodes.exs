@@ -9,7 +9,7 @@ defmodule PrimePobre.Repo.Migrations.CreateSerieSeasonEpisodes do
       add :description, :string
       add :media, :string
       add :source, :string
-      add :images, {:array, :string}
+      add :thumbnail_url, :string
       add :mime_type, :string
       add :duration, :integer
       add :number, :integer

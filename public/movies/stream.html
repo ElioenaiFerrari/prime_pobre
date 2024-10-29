@@ -47,7 +47,7 @@
       if (movieId) {
         getMovie(movieId).then((movie) => {
           const videoElement = document.getElementById('movie-video');
-          videoElement.poster = movie.images[0];
+          videoElement.poster = movie.thumbnail_url;
 
           // Define o URL do vídeo para o player
           videoElement.src = `http://localhost:4000/api/movies/${movieId}/stream`;
