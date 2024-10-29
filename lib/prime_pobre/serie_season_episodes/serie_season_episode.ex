@@ -2,7 +2,7 @@ defmodule PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode do
   use Ecto.Schema
   import Ecto.Changeset
   alias PrimePobre.SerieSeasons.SerieSeason
-  @sources ~w(file remote)a
+  @sources ~w(file remote)
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id

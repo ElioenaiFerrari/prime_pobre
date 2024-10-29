@@ -1,7 +1,7 @@
 defmodule PrimePobre.Movies.Movie do
   use Ecto.Schema
   import Ecto.Changeset
-  @sources ~w(file remote)a
+  @sources ~w(file remote)
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
