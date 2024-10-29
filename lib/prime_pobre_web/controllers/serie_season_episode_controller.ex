@@ -1,7 +1,6 @@
 defmodule PrimePobreWeb.SerieSeasonEpisodeController do
   use PrimePobreWeb, :controller
 
-  alias PrimePobre.Repo
   alias PrimePobre.SerieSeasonEpisodes
   alias PrimePobre.SerieSeasonEpisodes.SerieSeasonEpisode
 
