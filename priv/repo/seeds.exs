@@ -43,7 +43,7 @@ SerieSeasonEpisodes.create_serie_season_episode(season, %{
   title: "The Fellowship of the Ring",
   description:
     "A young hobbit, Frodo, who has found the One Ring that belongs to the Dark Lord Sauron, begins his journey with eight companions to Mount Doom, the only place where it can be destroyed.",
-  media: "series/peaky_blinders/S01E01.mkv",
+  media: "https://videos.pexels.com/video-files/28828145/12487871_1440_2560_60fps.mp4",
   source: "remote",
   thumbnail_url:
     "https://gizmodo.uol.com.br/wp-content/blogs.dir/8/files/2023/07/peaky-blinders.jpg",

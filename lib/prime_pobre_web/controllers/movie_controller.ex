@@ -101,18 +101,28 @@ defmodule PrimePobreWeb.MovieController do
          } = movie
        ) do
     conn =
-      conn
-      |> put_resp_content_type(movie.mime_type)
-      |> send_chunked(:ok)
+      case Map.get(conn, :status) do
+        nil ->
+          conn
+          |> put_resp_content_type(movie.mime_type)
+          |> send_chunked(:partial_content)
 
-    HTTPoison.get!(media, [], stream_to: self())
+          HTTPoison.get!(media, [], stream_to: self())
+
+        _ ->
+          conn
+      end
 
     receive do
       %HTTPoison.AsyncChunk{chunk: chunk} ->
         # Envia o chunk ao cliente
         case chunk(conn, chunk) do
-          {:ok, conn} -> stream_video_chunks(conn, movie)
-          {:error, :closed} -> :ok
+          {:ok, conn} ->
+            # Continua a transmissão sem chamar de volta a função
+            stream_video_chunks(conn, movie)
+
+          {:error, :closed} ->
+            :ok
         end
 
       %HTTPoison.AsyncEnd{} ->

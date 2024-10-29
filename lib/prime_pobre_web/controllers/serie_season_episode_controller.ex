@@ -98,21 +98,26 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeController do
          %SerieSeasonEpisode{
            source: "remote",
            media: media
-         } = episode
+         } = movie
        ) do
     conn =
       conn
-      |> put_resp_content_type(episode.mime_type)
-      |> send_chunked(:ok)
+      |> put_resp_content_type(movie.mime_type)
+      |> send_chunked(:partial_content)
 
+    # Inicia o streaming do HTTPoison após configurar o conn
     HTTPoison.get!(media, [], stream_to: self())
 
     receive do
       %HTTPoison.AsyncChunk{chunk: chunk} ->
         # Envia o chunk ao cliente
         case chunk(conn, chunk) do
-          {:ok, conn} -> stream_video_chunks(conn, episode)
-          {:error, :closed} -> :ok
+          {:ok, conn} ->
+            # Continua a transmissão sem chamar de volta a função
+            stream_video_chunks(conn, movie)
+
+          {:error, :closed} ->
+            :ok
         end
 
       %HTTPoison.AsyncEnd{} ->
@@ -125,7 +130,7 @@ defmodule PrimePobreWeb.SerieSeasonEpisodeController do
 
       _ ->
         # Ignora qualquer outra mensagem
-        stream_video_chunks(conn, episode)
+        stream_video_chunks(conn, movie)
     after
       # Timeout de 5 segundos
       5_000 -> :ok

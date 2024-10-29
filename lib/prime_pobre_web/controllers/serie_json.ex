@@ -20,6 +20,7 @@ defmodule PrimePobreWeb.SerieJSON do
       id: serie.id,
       title: serie.title,
       description: serie.description,
+      thumbnail_url: serie.thumbnail_url,
       genre: serie.genre
     }
   end
